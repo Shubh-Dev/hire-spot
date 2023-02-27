@@ -6,13 +6,13 @@ import Job from "./components/Job";
 
 function App() {
   console.log(jobs)
-  const allJobs = jobs.map((job) => {
-    return <Job 
-      id={job.id}
-      company={job.company}
-      role={job.role}
-      skills={job.skills}
-    />
+    const allJobs = jobs.map((job) => {
+      return <Job 
+        key={job.id}
+        company={job.company}
+        role={job.role}
+        skills={job.skills}
+      />
   })
     return (
       <div>
