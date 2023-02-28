@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
-import jobs from "./components/data/Data";
-import Job from "./components/Job";
+// import jobs from "./components/data/Data";
+// import Job from "./components/Job";
 
 
 function App() {
-  console.log(jobs)
-    const allJobs = jobs.map((job) => {
-      return <Job 
-        key={job.id}
-        company={job.company}
-        role={job.role}
-        skills={job.skills}
-      />
-  })
+
+
+  const [jobData, setJobData] = useState({})
+  //   const allJobs = jobData.map((job) => {
+  //     return <Job 
+  //       key={job.id}
+  //       company={job.company_name}
+  //       skills={job.skills}
+  //     />
+  // })
+
+  fetch("api/v1/jobs")
+   .then(res => res.json())
+   .then(data => setJobData(data))
+
     return (
       <div>
-        <Header />
-        {allJobs}
+        <pre>{JSON.stringify(jobData, null, 2)}</pre>
+        {/* <Header />
+        {allJobs} */}
       </div>
     )
        
