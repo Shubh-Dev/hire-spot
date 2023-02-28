@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 // import jobs from "./components/data/Data";
 // import Job from "./components/Job";
+const url = "api/v1/jobs"
 
 
 function App() {
@@ -16,9 +17,13 @@ function App() {
   //     />
   // })
 
-  fetch("api/v1/jobs")
-   .then(res => res.json())
-   .then(data => setJobData(data))
+  useEffect(() => {
+    fetch(url)
+    .then(res => res.json())
+    .then(data => setJobData(data))
+  }, [0])
+
+
 
     return (
       <div>
