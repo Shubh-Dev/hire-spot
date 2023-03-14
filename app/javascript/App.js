@@ -1,35 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import Header from "./components/Header";
-// import jobs from "./components/data/Data";
-// import Job from "./components/Job";
+import Job from "./components/Job";
 const url = "api/v1/jobs"
+
+
+
 
 
 function App() {
 
-
-  const [jobData, setJobData] = useState({})
-  //   const allJobs = jobData.map((job) => {
-  //     return <Job 
-  //       key={job.id}
-  //       company={job.company_name}
-  //       skills={job.skills}
-  //     />
-  // })
+  const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    fetch(url)
-    .then(res => res.json())
-    .then(data => setJobData(data))
-  }, [0])
+    async function getJobs() {
+      const response = await fetch(url);
+      const data = await response.json();
+      setJobs(data)
+      }
+    getJobs()
+  }, [])
 
-
+  const allJobs = jobs.map(item => (
+    <Job 
+      key={item.id}
+      photo={item.photo}
+      company={item.company_name}
+      title={item.job_title}
+      skills={item.skills}
+    />
+  ))
 
     return (
       <div>
-        <pre>{JSON.stringify(jobData, null, 2)}</pre>
-        {/* <Header />
-        {allJobs} */}
+        {/* <pre>{JSON.stringify(Data, null, 2)}</pre> */}
+        <Header />
+        {allJobs}
       </div>
     )
        
